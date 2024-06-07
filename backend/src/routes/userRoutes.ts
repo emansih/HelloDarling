@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import { getAllUsers, getUserAvilability, setUserDates, getUserDates, getUserDietaryRestrictions } from '../controllers/userController';
+import { getAllUsers, getUserAvilability, setUserDates, getUserDates, getUserDietaryRestrictions, getUser } from '../controllers/userController';
 
 const router = Router();
 
 router.get('/users', getAllUsers);
+
+router.get('/users/:id', getUser);
 
 router.get('/users/:id/availability', getUserAvilability);
 
