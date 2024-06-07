@@ -17,3 +17,9 @@ npm start
 The base URL is `http://localhost:3000`. Look at the routes folder for all available endpoints. 
 
 The model folder contains all database tables that will be created, for development purposes, tables are **DROPPED** and recreated on each run. 
+
+
+To run test
+```
+npx jest
+```
