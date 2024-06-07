@@ -82,7 +82,7 @@ export const setUserDates = async(req: Request, res: Response) => {
       return;
     }
 
-    const isDateTwoAvailbleOnDate: Boolean = await isDateBookedInTheRange(dateStart, dateEnd, daterOneId);
+    const isDateTwoAvailbleOnDate: Boolean = await isDateBookedInTheRange(dateStart, dateEnd, daterTwoId);
     if(!isDateTwoAvailbleOnDate){
       res.status(403).json({"message": "Date Two is not available between ".concat(dateStart).concat(" and ").concat(dateEnd)})
       return;
@@ -164,20 +164,21 @@ async function isDateAvailableOnDay(userId: number, dayOfWeek: string): Promise<
 }
 
 
-async function isDateBookedInTheRange(dateStart: string, dateEnd: string, userId: number): Promise<Boolean>  {
+async function isDateBookedInTheRange(scheduleDateStart: string, scheduledateEnd: string, userId: number): Promise<Boolean>  {
   const userDates = await UserDates.findAll({
     where: {
-      dateStart: {
-        [Op.gte]: dateStart
-      },
-      dateEnd: {
-        [Op.lte]: dateEnd
-      },
-      userDatesId: {
-        [Op.eq]: userId
-      }
+      [Op.or]: [{
+        dateStart: {
+              [Op.between]: [scheduleDateStart, scheduledateEnd]
+          }
+      }, {
+        dateEnd: {
+              [Op.between]: [scheduleDateStart, scheduledateEnd]
+          }
+      }]
     }
   })
+
   if(userDates.length > 0){
     return false
   } else {
