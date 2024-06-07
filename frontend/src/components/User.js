@@ -5,6 +5,7 @@ import axios from 'axios';
 import UserCard from './UserCard'
 import UserAvailability from './UserAvailabilities';
 import DietaryRestrictions from './DietaryRestrictions';
+import UserDates from './UserDates';
 
 const User = () => {
     
@@ -24,6 +25,15 @@ const User = () => {
 
         client.get('/users/' + userId + '/dietaryRestrictions').then((response) => {
             setUserDietaryRestrictions(response.data);
+        });
+
+        client.get('/users/' + userId).then((response) => {
+            setUsers(response.data);
+        });
+
+
+        client.get('/users/' + userId + '/userDates').then((response) => {
+            setUserDates(response.data);
         });
     }, []);
     
@@ -51,11 +61,21 @@ const User = () => {
         }
     }
 
+    const showUserDates = () => {
+        if(userDate.length !== 0){
+            return userDate.map(dates => {
+                return <UserDates key={dates.userDatesId} userDates={dates} />
+            })
+        }
+    }
+
     return (
         <div className="container">
             <div className="row">
+                {showUser()}
                 {showUserAvailability()}
                 {showUserDietaryRestrictions()}
+                {showUserDates()}
             </div>
         </div>
     );
