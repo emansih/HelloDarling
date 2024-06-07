@@ -60,6 +60,10 @@ export const setUserDates = async(req: Request, res: Response) => {
     const dateLocation: string = requestBody.dateLocation;
     const dayOfWeekName = getDayName(dateStart);
     
+    if(daterOneId === daterTwoId){
+      res.status(403).json({"message": "Please choose 2 different person"})
+      return;
+    }
     const isDateOneAvailableOnDay: Boolean = await isDateAvailableOnDay(daterOneId, dayOfWeekName);
     if(!isDateOneAvailableOnDay){
       res.status(403).json({"message": "Date One is not available on ".concat(dayOfWeekName)})
