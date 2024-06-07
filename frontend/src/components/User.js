@@ -75,6 +75,7 @@ const User = () => {
                 {showUser()}
                 {showUserAvailability()}
                 {showUserDietaryRestrictions()}
+                All date times are in UTC. 
                 {showUserDates()}
             </div>
         </div>

@@ -67,7 +67,6 @@ const DateBooking = () => {
         <>
 
         <Form onSubmit={handleSubmit}>
-            All date times are in UTC. 
             <h1>Date 1</h1>
             <label>
                 <select id="daterOne" value={formData.daterOne} onChange={handleInputChange}>
