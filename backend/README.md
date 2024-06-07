@@ -23,3 +23,10 @@ To run test
 ```
 npx jest
 ```
+
+
+Some design decisions when making the endpoints. 
+
+- I deliberately chose not to use Sequalize one to many associations(inner join) as I do not want to put heavy load on the DB when the front page is being loaded and most importantly, it **DOES NOT** scale well when number of users increase. 
+
+- The booking of dates endpoint has minimal validation due to lack of time. For example: I do not check if the booked date has passed. 
