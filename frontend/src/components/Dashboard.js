@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 import UserCard from './UserCard'
 const Dashboard = () => {
@@ -32,6 +34,10 @@ const Dashboard = () => {
 
     return (
         <div className="container">
+             <Link to="/booking">Setup Dates</Link>
+             <br />
+             <br />
+             <br />
             <div className="row">
                 {showUsers()}
             </div>
