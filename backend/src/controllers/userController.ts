@@ -89,7 +89,7 @@ export const setUserDates = async(req: Request, res: Response) => {
     }
 
     UserDates.create({ daterOneId: daterOneId, daterTwoId: daterTwoId , dateLocation: dateLocation, dateStart: dateStart, dateEnd: dateEnd }).then(() => {
-      res.status(200).json({"message": "Date successfully saved! "})
+      res.status(200).json({"message": "Date successfully saved!"})
     })
   } catch(error) {
     console.log(error)
@@ -171,14 +171,13 @@ async function isDateBookedInTheRange(dateStart: string, dateEnd: string, userId
         [Op.gte]: dateStart
       },
       dateEnd: {
-        [Op.gte]: dateEnd
+        [Op.lte]: dateEnd
       },
       userDatesId: {
         [Op.eq]: userId
       }
     }
   })
-  console.log(userDates)
   if(userDates.length > 0){
     return false
   } else {
